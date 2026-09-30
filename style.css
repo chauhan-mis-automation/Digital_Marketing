@@ -598,3 +598,44 @@ a.c-card:hover .c-arrow { transform: translateX(4px); color: var(--blue); }
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
   .reveal { opacity: 1; transform: none; }
 }
+
+/* ---------- Brands we've worked with ---------- */
+.dm-brands { padding-bottom: 90px; overflow: hidden; }
+.dm-brands::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 60%, rgba(139,92,246,.12), transparent 60%); pointer-events: none; }
+.brand-marquee { position: relative; display: flex; flex-direction: column; gap: 18px;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.brand-row { overflow: hidden; padding: 10px 0; }
+.brand-track { display: flex; gap: 18px; width: max-content; animation: brandScroll 55s linear infinite; }
+.brand-row.rev .brand-track { animation-direction: reverse; animation-duration: 60s; }
+.brand-marquee:hover .brand-track { animation-play-state: paused; }
+@keyframes brandScroll { to { transform: translateX(calc(-50% - 9px)); } }
+.brand {
+  --bc: #0aaeff; display: flex; align-items: center; gap: 14px; padding: 16px 22px 16px 16px; min-width: 230px;
+  border-radius: 18px; background: linear-gradient(160deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
+  border: 1px solid var(--border); position: relative; overflow: hidden;
+  transition: transform .35s ease, border-color .35s, box-shadow .35s;
+}
+.brand::after { content: ""; position: absolute; top: 0; left: -80%; width: 50%; height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,.12), transparent); transform: skewX(-20deg); transition: left .6s ease; }
+.brand:hover { transform: translateY(-6px) scale(1.03); border-color: color-mix(in srgb, var(--bc) 60%, transparent);
+  box-shadow: 0 18px 40px rgba(0,0,0,.4), 0 0 30px color-mix(in srgb, var(--bc) 25%, transparent); }
+.brand:hover::after { left: 130%; }
+.brand.c0 { --bc: #0aaeff; } .brand.c1 { --bc: #a26bff; } .brand.c2 { --bc: #ff7a45; }
+.brand.c3 { --bc: #22c55e; } .brand.c4 { --bc: #ff4d8d; } .brand.c5 { --bc: #fbbc05; }
+.b-ic { width: 46px; height: 46px; border-radius: 14px; flex-shrink: 0; display: grid; place-items: center; font-size: 19px;
+  color: var(--bc); background: color-mix(in srgb, var(--bc) 15%, transparent); border: 1px solid color-mix(in srgb, var(--bc) 35%, transparent);
+  animation: bIcon 4s ease-in-out infinite; }
+.brand:nth-child(odd) .b-ic { animation-delay: -2s; }
+@keyframes bIcon { 50% { box-shadow: 0 0 18px color-mix(in srgb, var(--bc) 45%, transparent); } }
+.b-txt { display: flex; flex-direction: column; line-height: 1.25; }
+.b-txt strong { font-family: var(--head); font-size: 16.5px; font-weight: 800; white-space: nowrap; }
+.b-txt small { font-size: 12px; color: var(--muted); white-space: nowrap; margin-top: 2px; }
+@media (max-width: 768px) {
+  .brand { min-width: 0; padding: 12px 16px 12px 12px; gap: 11px; }
+  .b-ic { width: 38px; height: 38px; font-size: 16px; border-radius: 11px; }
+  .b-txt strong { font-size: 14.5px; }
+  .brand-track { gap: 12px; animation-duration: 40s; }
+  .brand-row.rev .brand-track { animation-duration: 44s; }
+  @keyframes brandScroll { to { transform: translateX(calc(-50% - 6px)); } }
+}
